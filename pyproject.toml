@@ -1,0 +1,19 @@
+[project]
+name = "corporate-mcp-system-inspector"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "313on", email = "bakhtarni@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=2.1.1",
+]
+
+[project.scripts]
+corporate-mcp-system-inspector = "corporate_mcp_system_inspector:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
