@@ -33,6 +33,6 @@ uv run python scripts/verify_security_boundary.py
 uv build
 ```
 
-Run the server locally with `uv run corporate-mcp-system-inspector` when MCP stdio interaction is needed.
+Run the server locally with `uv run corporate-mcp-system-inspector` (or `uv run python -m corporate_mcp_system_inspector`) when MCP stdio interaction is needed.
 
 The server communicates over MCP stdio when run through the project script.
