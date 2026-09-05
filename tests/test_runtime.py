@@ -1,8 +1,10 @@
 import json
-import shutil
+import os
 import subprocess
 import sys
+import sysconfig
 import unittest
+from pathlib import Path
 
 
 EXPECTED_TOOLS = {
@@ -55,9 +57,11 @@ class RuntimeIntegrationTests(unittest.TestCase):
         )
 
     def test_console_entrypoint_serves_mcp_initialize_and_tools_list(self):
-        command = shutil.which("corporate-mcp-system-inspector")
-        self.assertIsNotNone(command, "packaged console entrypoint is not available")
-        self._assert_stdio_handshake([command])
+        command = Path(sysconfig.get_path("scripts")) / "corporate-mcp-system-inspector"
+        if os.name == "nt" and not command.exists():
+            command = command.with_suffix(".exe")
+        self.assertTrue(command.is_file(), f"packaged console entrypoint is not available: {command}")
+        self._assert_stdio_handshake([str(command)])
 
     def test_module_entrypoint_serves_mcp_initialize_and_tools_list(self):
         self._assert_stdio_handshake([sys.executable, "-m", "corporate_mcp_system_inspector"])
